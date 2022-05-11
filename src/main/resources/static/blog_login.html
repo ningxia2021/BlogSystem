@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <!--  引入公有样式  -->
+    <link rel="stylesheet" href="css/common.css">
+    <!--  引入登录样式  -->
+    <link rel="stylesheet" href="css/blog_login.css">
+    <!--引入Vue-->
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <!-- logo -->
+        <img src="img/tree.jpg" alt="logo">
+        <!-- title -->
+        <span class="title">我的博客系统</span>
+        <!-- 展位空格 -->
+        <span class="space"></span>
+        <!-- 右侧的几个链接 -->
+        <a href="blog_list.html">主页</a>
+        <a href="blog.edit.html">写博客</a>
+     <a href="logout" style="display: none">注销</a>
+    </div>
+
+    <!-- 登录容器 -->
+    <div class="login_container">
+        <div class="login_dialog">
+            <div class="title">
+                <h2>登 录</h2>
+            </div>
+            <div class="row">
+                <span>用 户</span>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="row">
+                <span>密 码</span>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="row">
+                <input type="button" value="提交" id="submit">
+                <input type="button" value="注册" id="reg">
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+
+</body>
+</html>

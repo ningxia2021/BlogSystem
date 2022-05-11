@@ -1,0 +1,21 @@
+/* 这个页面放置博客详情页 */
+.right {
+    padding: 25px;
+}
+/*标题*/
+.blog_content h2{
+    width: 100%;
+    text-align: center;
+}
+/*时间*/
+.blog_content .date{
+    text-align: center;
+    color: darkorange;
+    padding: 20px;
+}
+/*段落*/
+.blog_content p{
+    /*首行缩进*/
+    text-indent: 2em;
+    padding: 5px;
+}

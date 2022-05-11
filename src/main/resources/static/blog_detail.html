@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>博客详情</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--  引入公有样式  -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog_detail.css">
+    <!--  引入Vue  -->
+    <script crossorigin="anonymous" type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<div class="nav">
+    <!-- logo -->
+    <img src="img/tree.jpg" alt="logo">
+    <!-- title -->
+    <span class="title">我的博客系统</span>
+    <!-- 展位空格 -->
+    <span class="space"></span>
+    <!-- 右侧的几个链接 -->
+    <a href="blog_list.html">主页</a>
+    <a href="blog.edit.html">写博客</a>
+    <a href="logout">注销</a>
+</div>
+
+<!-- 加入版心布局 -->
+<div class="container">
+    <!-- 左侧信息-->
+    <div class="left">
+        <div class="card">
+            <!-- 用户头像 -->
+            <img src="img/lake.jpg" alt="个人头像">
+            <!-- 用户姓名 -->
+            <h2>一条大菜狗</h2>
+            <!-- github -->
+            <a href="http://github.com">http://github.com</a>
+            <!-- 统计信息 -->
+            <div class="counter">
+                <span>文章</span>
+                <span>分类</span>
+            </div>
+            <div class="counter">
+                <span>01</span>
+                <span>02</span>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧为博客详情内容 -->
+    <div class="right">
+        <div class="blog_content">
+            <h2 class="title"></h2>
+            <div class="date"></div>
+            <div class="desc"></div>
+        </div>
+    </div>
+</div>
+<!--  引入Jquery  -->
+<script crossorigin="anonymous" type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        //    渲染后端的body
+        // location.search 用来拿到当前页面url中的参数
+        url: 'detail'+location.search,
+        type: 'get',
+        dataType: 'json',
+        success: function (data, status) {
+            console.log("成功进入ajax");
+            console.log(status)
+            buildDetail(data);
+        },
+        error: function (data, status) {
+            console.log("没有进入ajax");
+            console.log(status);
+        }
+    })
+
+    function buildDetail(blog) {
+        //    取值填充 渲染页面
+        //    拿父元素控制权
+        let right = document.querySelector('.right');
+        right.className='right';
+        //    创建容器
+        let blog_content_Div = document.createElement('div');
+        blog_content_Div.className = 'blog_content';
+        //    创建标题
+        let titleH2 = document.createElement('h2');
+        titleH2.className = 'title';
+        titleH2.innerHTML = blog.title;
+        blog_content_Div.appendChild(titleH2);
+        //    创建日期
+        let dataDiv = document.createElement('div');
+        dataDiv.className = 'date';
+        dataDiv.innerHTML = blog.postTime;
+        blog_content_Div.appendChild(dataDiv);
+        let descDiv = document.createElement('div');
+        descDiv.className = 'desc';
+        descDiv.innerHTML = blog.content;
+        blog_content_Div.appendChild(descDiv);
+        right.appendChild(blog_content_Div);
+    }
+</script>
+</body>
+</html>

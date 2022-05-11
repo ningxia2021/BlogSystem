@@ -1,0 +1,57 @@
+/*这个文件专门放置博客列表页的样式*/
+
+.blog {
+    width: 100%;
+    padding: 10px;
+}
+
+.blog .title{
+    width: 100%;
+    font-size: 20px;
+    /*字体加粗*/
+    font-weight: bold;
+    /*内容居中*/
+    text-align: center;
+    padding: 20px;
+}
+
+.blog .data {
+    color: brown;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.blog .desc {
+    color: black;
+    /*首行缩进两字符*/
+    text-indent: 2em;
+}
+
+.blog .detail{
+    /*先变成块级元素*/
+    display: block;
+    /*去下划线*/
+    text-decoration: none;
+    /*设置块宽度和高度*/
+    width: 100px;
+    height: 35px;
+    /*字体颜色*/
+    color: black;
+    /*元素居中*/
+    margin: 0 auto;
+    /*字体xy方向居中*/
+    text-align: center;
+    line-height: 35px;
+    color: black;
+    /* 设置边框 */
+    border: 2px solid black;
+    margin-top: 10px;
+/*  过度效果  */
+    transition: all 0.3s;
+}
+
+/*设置鼠标悬停效果*/
+.blog .detail:hover{
+    /*background-color: dodgerblue;*/
+    color: dodgerblue;
+}

@@ -1,0 +1,69 @@
+/*登录样式*/
+.login_container{
+    width: 100%;
+    height: calc(100% - 50px);
+    /*background-color: rgba(255,255,255,0.8);*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_dialog{
+    background-color: rgba(255,255,255,0.4);
+    width: 360px;
+    height: 230px;
+    border-radius: 20px;
+}
+
+.login_dialog h2{
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.login_dialog .row{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+}
+
+.login_dialog span{
+    width: 20%;
+    margin-left: 20px;
+    font-weight: bolder;
+}
+
+.login_dialog input{
+    width: 80%;
+    height: 35px;
+    border: none;
+    text-indent: 10px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.login_dialog #submit{
+    width: 100px;
+    /*margin: 0 auto;*/
+    border: none;
+    /*float: left;*/
+    margin-left: 65px;
+}
+
+.login_dialog #submit:active{
+    background-color: orange;
+    border: none;
+}
+
+.login_dialog #reg{
+    width: 100px;
+    margin-left: 30px;
+}
+
+.login_dialog #reg:active{
+    background-color: orange;
+    border: none;
+}

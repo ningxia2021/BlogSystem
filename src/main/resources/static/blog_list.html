@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客列表页</title>
+    <!--  引入公有样式  -->
+    <link rel="stylesheet" href="css/common.css">
+    <!--  引入博客列表页的样式  -->
+    <link rel="stylesheet" href="css/blog_list.css">
+    <!--  引入Vue  -->
+    <script crossorigin="anonymous" type="text/javascript" src="js/vue.js"></script>
+
+</head>
+<body>
+<!-- 导航栏 -->
+<div class="nav">
+    <!-- logo -->
+    <img src="img/tree.jpg" alt="logo">
+    <!-- title -->
+    <span class="title">我的博客系统</span>
+    <!-- 展位空格 -->
+    <span class="space"></span>
+    <!-- 右侧的几个链接 -->
+    <a href="blog_list.html">主页</a>
+    <a href="blog.edit.html">写博客</a>
+    <a href="logout">注销</a>
+</div>
+
+<!-- 版心 -->
+<div class="container">
+    <!-- 左侧个人信息 -->
+    <div class="left">
+        <div class="card">
+            <!-- 用户头像 -->
+            <img src="img/lake.jpg" alt="个人头像">
+            <!-- 用户姓名 -->
+            <h2>一条大菜狗</h2>
+            <!-- github -->
+            <a  onclick="github()">http://github.com</a>
+            <!-- 统计信息 -->
+            <div class="counter">
+                <span>文章</span>
+                <span>分类</span>
+            </div>
+            <div class="counter">
+                <span>01</span>
+                <span>02</span>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧内容详情 -->
+    <div class="right">
+<!--
+        这里是渲染的模板，每一篇博客都是按照这样的格式进行渲染，因此一开始可以先写死数据来定版式，后再用js中data来动态替换
+        <div class="blog">
+            博客标题
+            <div class="title"></div>
+            创建时间
+            <div class="data"></div>
+            博客摘要
+            <div class="desc">
+            </div>
+            查看详情按钮
+            <a href="blog_detail.html" class="detail">
+           </a>
+        </div>
+-->
+    </div>
+</div>
+<!--一定要在body'中 或者 body后引入js文件，为的就是加载时渲染，不然都渲染结束了，要你js有何用-->
+    <!--  引入Jquery  -->
+    <script crossorigin="anonymous" type="text/javascript" src="js/jquery.min.js"></script>
+    <!--  基于ajax的方式从服务器获取数据  -->
+    <script>
+        <!--    通过ajax给服务器发送一个获取博客列表的请求    -->
+        $.ajax({
+            url: 'blog', //注意路径不带/
+            type: 'get',
+            dataType: 'json',
+            success: function (data, status) {
+                //data就表示响应的body
+                //status就表示响应的状态码描述
+                //前后端分离，就需要通过返回的data来构造HTML片段
+                //此处预期data已经是json数组
+                console.log(data);
+                console.log(status);
+                console.log("进入ajax")
+                buildBlogs(data);
+            },
+            error: function(data, status) {
+                console.log("没有进入");
+                console.log("进入 error 函数:" + status);
+                // 此处就可以进行一个页面的重定向跳转即可~~
+                // 这个操作, 就是在前端进行重定向
+                location.assign('login.html');
+            }
+        })
+
+        // 2.根据响应中的body数据构造html内容
+        function buildBlogs(arguments) {
+            //获取容器控制
+            let rightDiv = document.querySelector('.right');
+            //js中for循环的惯用手法，类似foreach
+            for (let blog of arguments) {
+                //    这里就按照每一篇博客的结构来构造属性及内容
+                //    创建出blog
+                let blogDiv = document.createElement('div');
+                blogDiv.className = "blog";
+                //创建title
+                let titleDiv = document.createElement('div');
+                titleDiv.className = 'title';
+                titleDiv.innerHTML = blog.title;
+                blogDiv.appendChild(titleDiv);
+                //创建date
+                let dataDiv = document.createElement('div');
+                dataDiv.className = 'data';
+                dataDiv.innerHTML = formatDate(blog.postTime);
+                blogDiv.appendChild(dataDiv);
+                //创建desc
+                let descDiv = document.createElement('div');
+                descDiv.className = 'desc';
+                descDiv.innerHTML = blog.content;
+                blogDiv.appendChild(descDiv);
+                //创建a标签
+                let aDetail = document.createElement('a');
+                aDetail.className = 'detail';
+                aDetail.innerHTML = '查看全文&gt;&gt;';
+                aDetail.href = 'blog_detail.html?blogId=' + blog.blogId;
+                blogDiv.appendChild(aDetail);
+                //统统加入父元素中
+                rightDiv.appendChild(blogDiv);
+            }
+
+            function formatDate(timeStampMS) {
+                var date = new Date(timeStampMS);
+
+                var year = date.getFullYear(),
+                    month = date.getMonth() + 1,//月份是从0开始的
+                    day = date.getDate(),
+                    hour = date.getHours(),
+                    min = date.getMinutes(),
+                    sec = date.getSeconds();
+                var newTime = year + '-' +
+                    (month < 10? '0' + month : month) + '-' +
+                    (day < 10? '0' + day : day) + ' ' +
+                    (hour < 10? '0' + hour : hour) + ':' +
+                    (min < 10? '0' + min : min) + ':' +
+                    (sec < 10? '0' + sec : sec);
+                return newTime;
+            }
+        }
+        function github() {
+            //重定向
+            location.assign('http://github.com');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 定义映射关系，关联dao层被@Mapper接口  -->
+<!-- namespace 是用来关联的全路径-->
+<mapper namespace = "com.example.blog.dao.UserMapper">
+<!--  表-实体 映射关系  -->
+    <resultMap id="resultBaseMap" type="com.example.blog.entity.User">
+        <id column="userId" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+<!-- 新建用户 -->
+    <insert id="addUser" parameterType="com.example.blog.entity.User">
+        insert into user values(#{userId},#{username},#{password});
+    </insert>
+<!--  查询所有用户信息  -->
+    <select id="selectUserAll" resultType="com.example.blog.entity.User">
+        select * from user;
+    </select>
+<!--  根据用户名查找用户对象  -->
+    <select id="selectUserByUsername" resultType="com.example.blog.entity.User">
+        select * from user where username = #{username};
+    </select>
+<!--    根据id查找用户信息-->
+    <select id="selectUserById" resultType="com.example.blog.entity.User">
+        select * from user where userId = #{userId};
+    </select>
+</mapper>
