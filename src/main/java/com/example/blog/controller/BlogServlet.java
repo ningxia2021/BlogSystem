@@ -161,4 +161,34 @@ public class BlogServlet {
         session.removeAttribute("user");
         response.sendRedirect("blog_login.html");
     }
+
+    @GetMapping("/del")
+    public void del(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        String blogId = request.getParameter("blogId");
+        if (blogId==null || blogId.equals("")){
+            response.getWriter().write("<h1>参数缺失</h1>");
+            return;
+        }
+        Blog blog = blogMapper.selectByBlogId(Integer.parseInt(blogId));
+        if (blog==null){
+            response.getWriter().write("<h1>当前博客不存在</h1>");
+            return;
+        }
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            response.getWriter().write("<h1>当前用户未登录，无法删除</h1>");
+            return;
+        }
+        int userId = user.getUserId();
+        int authorId = blog.getUserId();
+        if (userId != authorId){
+            response.getWriter().write("<h1>当前博客不归属于你，没有权限删除</h1>");
+            return;
+        }
+        blogMapper.deleteByBlogId(Integer.parseInt(blogId));
+        response.sendRedirect("blog_list.html");
+    }
+
 }
