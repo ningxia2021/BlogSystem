@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="css/blog_detail.css">
     <!--  引入Vue  -->
     <script crossorigin="anonymous" type="text/javascript" src="js/vue.js"></script>
+    <!-- 引入 editor.md 的依赖 -->
+    <link crossorigin="anonymous" rel="stylesheet" href="editor.md-master/editor.md-master/css/editormd.min.css"/>
+    <script crossorigin="anonymous" src="editor.md-master/editor.md-master/lib/marked.min.js"></script>
+    <script crossorigin="anonymous" src="editor.md-master/editor.md-master/lib/prettify.min.js"></script>
+    <script crossorigin="anonymous" src="editor.md-master/editor.md-master/editormd.js"></script>
 </head>
 <body>
 
@@ -25,7 +30,7 @@
     <span class="space"></span>
     <!-- 右侧的几个链接 -->
     <a href="blog_list.html">主页</a>
-    <a href="blog.edit.html">写博客</a>
+    <a href="blog_edit.html">写博客</a>
     <a href="logout">注销</a>
 </div>
 
@@ -37,7 +42,7 @@
             <!-- 用户头像 -->
             <img src="img/lake.jpg" alt="个人头像">
             <!-- 用户姓名 -->
-            <h2>一条大菜狗</h2>
+            <h2 class="username"></h2>
             <!-- github -->
             <a href="http://github.com">http://github.com</a>
             <!-- 统计信息 -->
@@ -54,9 +59,11 @@
     <!-- 右侧为博客详情内容 -->
     <div class="right">
         <div class="blog_content">
-            <h2 class="title"></h2>
+            <h2 id="title"></h2>
             <div class="date"></div>
-            <div class="desc"></div>
+            <div id="content" style="background-color:transparent;">
+
+            </div>
         </div>
     </div>
 </div>
@@ -66,7 +73,7 @@
     $.ajax({
         //    渲染后端的body
         // location.search 用来拿到当前页面url中的参数
-        url: 'detail'+location.search,
+        url: 'detail' + location.search,
         type: 'get',
         dataType: 'json',
         success: function (data, status) {
@@ -74,36 +81,60 @@
             console.log(status)
             buildDetail(data);
         },
-        error: function (data, status) {
-            console.log("没有进入ajax");
-            console.log(status);
+        error: function(data, status) {
+            console.log("没有进入");
+            console.log("进入 error 函数:" + status);
+            // 此处就可以进行一个页面的重定向跳转即可~~
+            // 这个操作, 就是在前端进行重定向
+            location.assign('blog_login.html');
         }
     })
 
+    // 构建html页面
     function buildDetail(blog) {
-        //    取值填充 渲染页面
-        //    拿父元素控制权
-        let right = document.querySelector('.right');
-        right.className='right';
-        //    创建容器
-        let blog_content_Div = document.createElement('div');
-        blog_content_Div.className = 'blog_content';
-        //    创建标题
-        let titleH2 = document.createElement('h2');
-        titleH2.className = 'title';
-        titleH2.innerHTML = blog.title;
-        blog_content_Div.appendChild(titleH2);
-        //    创建日期
-        let dataDiv = document.createElement('div');
-        dataDiv.className = 'date';
-        dataDiv.innerHTML = blog.postTime;
-        blog_content_Div.appendChild(dataDiv);
-        let descDiv = document.createElement('div');
-        descDiv.className = 'desc';
-        descDiv.innerHTML = blog.content;
-        blog_content_Div.appendChild(descDiv);
-        right.appendChild(blog_content_Div);
+        let title = document.querySelector('#title');
+        title.innerHTML = blog.title;
+        let date = document.querySelector(".date");
+        date.innerHTML = formatDate(blog.postTime);
+        // 通过markdown写入id 为 content 的位置，注意是id 不是class
+        // 把blog.content按照markdown的方式进行渲染，并在页面上展示
+        editormd.markdownToHTML("content", {
+            markdown: blog.content,
+        })
     }
+
+    function formatDate(timeStampMS) {
+        var date = new Date(timeStampMS);
+
+        var year = date.getFullYear(),
+            month = date.getMonth() + 1,//月份是从0开始的
+            day = date.getDate(),
+            hour = date.getHours(),
+            min = date.getMinutes(),
+            sec = date.getSeconds();
+        var newTime = year + '-' +
+            (month < 10 ? '0' + month : month) + '-' +
+            (day < 10 ? '0' + day : day) + ' ' +
+            (hour < 10 ? '0' + hour : hour) + ':' +
+            (min < 10 ? '0' + min : min) + ':' +
+            (sec < 10 ? '0' + sec : sec);
+        return newTime;
+    }
+
+    $.ajax({
+        url: 'user'+location.search,
+        type: 'get',
+        success:function (data,status) {
+            buildUserDetail(data);
+            console.log(data);
+            console.log(status)
+        }
+    })
+    function buildUserDetail(user) {
+        let name = document.querySelector('.username');
+        name.innerHTML = user.username;
+    }
+
 </script>
 </body>
 </html>

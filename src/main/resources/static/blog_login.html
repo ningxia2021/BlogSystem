@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="css/common.css">
     <!--  引入登录样式  -->
     <link rel="stylesheet" href="css/blog_login.css">
-    <!--引入Vue-->
-    <script type="text/javascript" src="js/vue.js"></script>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -21,7 +19,7 @@
         <span class="space"></span>
         <!-- 右侧的几个链接 -->
         <a href="blog_list.html">主页</a>
-        <a href="blog.edit.html">写博客</a>
+        <a href="blog_edit.html">写博客</a>
      <a href="logout" style="display: none">注销</a>
     </div>
 
@@ -31,23 +29,48 @@
             <div class="title">
                 <h2>登 录</h2>
             </div>
-            <div class="row">
-                <span>用 户</span>
-                <input type="text" id="username" name="username">
-            </div>
-            <div class="row">
-                <span>密 码</span>
-                <input type="password" id="password" name="password">
-            </div>
-            <div class="row">
-                <input type="button" value="提交" id="submit">
-                <input type="button" value="注册" id="reg">
-            </div>
+            <form action="login" method="post">
+                <div class="row">
+                    <span>用 户</span>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="row">
+                    <span>密 码</span>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="row">
+                    <input type="submit" value="提交" id="submit">
+                    <input type="button" value="注册" id="reg">
+                </div>
+            </form>
         </div>
     </div>
 
+    <!--  引入Jquery  -->
+    <script crossorigin="anonymous" type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-
+        // function tijiao(){
+        //     $.ajax({
+        //         url:'login',
+        //         data:$('#login').serialize(),
+        //         type:'POST',
+        //         success:function (data,status) {
+        //             if (data.status==600){
+        //                 alert(data.mes);
+        //             }
+        //             if (data.status==601){
+        //                 alert(data.mes);
+        //             }
+        //             if (data.status==602){
+        //                 alert(data.mes);
+        //             }
+        //             if (data.status==200){
+        //                 alert(data.mes);
+        //                 location.assign('blog_list.html');
+        //             }
+        //         }
+        //     })
+        // }
     </script>
 
 </body>

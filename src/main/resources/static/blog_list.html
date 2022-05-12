@@ -24,7 +24,7 @@
     <span class="space"></span>
     <!-- 右侧的几个链接 -->
     <a href="blog_list.html">主页</a>
-    <a href="blog.edit.html">写博客</a>
+    <a href="blog_edit.html">写博客</a>
     <a href="logout">注销</a>
 </div>
 
@@ -36,7 +36,7 @@
             <!-- 用户头像 -->
             <img src="img/lake.jpg" alt="个人头像">
             <!-- 用户姓名 -->
-            <h2>一条大菜狗</h2>
+            <h2></h2>
             <!-- github -->
             <a  onclick="github()">http://github.com</a>
             <!-- 统计信息 -->
@@ -94,7 +94,7 @@
                 console.log("进入 error 函数:" + status);
                 // 此处就可以进行一个页面的重定向跳转即可~~
                 // 这个操作, 就是在前端进行重定向
-                location.assign('login.html');
+                location.assign('blog_login.html');
             }
         })
 
@@ -155,6 +155,20 @@
             //重定向
             location.assign('http://github.com');
         }
+
+        $.ajax({
+            url:'user',
+            type:'get',
+            success:function (data,status) {
+                buildUser(data);
+            }
+        })
+        function buildUser(user) {
+            let name = document.querySelector('.card h2');
+            name.innerHTML=user.username;
+        }
+
+
     </script>
 </body>
 </html>

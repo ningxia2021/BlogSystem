@@ -1,9 +1,10 @@
 package com.example.blog.common;
 
 import com.example.blog.entity.User;
-
+import org.springframework.context.annotation.Configuration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 public class util {
 //    1.登录状态检测
