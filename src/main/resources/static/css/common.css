@@ -116,6 +116,11 @@ a:hover {  color : #1A8BE8 ; }
 /*展示文章数目*/
 .counter{
     padding: 5px;
+    text-align: center;
     display: flex;
+    justify-content: space-around;
+}
+
+.counter span{
     justify-content: space-around;
 }

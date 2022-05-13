@@ -40,7 +40,7 @@
                 </div>
                 <div class="row">
                     <input type="submit" value="提交" id="submit">
-                    <input type="button" value="注册" id="reg">
+                    <input type="button" value="注册" id="reg" onclick="regButton()">
                 </div>
             </form>
         </div>
@@ -49,28 +49,9 @@
     <!--  引入Jquery  -->
     <script crossorigin="anonymous" type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-        // function tijiao(){
-        //     $.ajax({
-        //         url:'login',
-        //         data:$('#login').serialize(),
-        //         type:'POST',
-        //         success:function (data,status) {
-        //             if (data.status==600){
-        //                 alert(data.mes);
-        //             }
-        //             if (data.status==601){
-        //                 alert(data.mes);
-        //             }
-        //             if (data.status==602){
-        //                 alert(data.mes);
-        //             }
-        //             if (data.status==200){
-        //                 alert(data.mes);
-        //                 location.assign('blog_list.html');
-        //             }
-        //         }
-        //     })
-        // }
+        function regButton() {
+            location.href="blog_register.html";
+        }
     </script>
 
 </body>

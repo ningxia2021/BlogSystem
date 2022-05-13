@@ -42,7 +42,7 @@
     <div class="left">
         <div class="card">
             <!-- 用户头像 -->
-            <img src="img/lake.jpg" alt="个人头像">
+            <img src="imga17a66d8-bdce-482d-a7bc-a1e12e3958c4.gif" alt="个人头像">
             <!-- 用户姓名 -->
             <h2 class="username"></h2>
             <!-- github -->
@@ -53,7 +53,7 @@
                 <span>分类</span>
             </div>
             <div class="counter">
-                <span>01</span>
+                <span id="num"></span>
                 <span>02</span>
             </div>
         </div>
@@ -150,6 +150,20 @@
     var blogId = getQueryVariable("blogId");
     let hrefDel = document.querySelector('#del');
     hrefDel.href='del?blogId='+blogId;
+
+    //获取文章数量
+    $.ajax({
+        url:'num',
+        type:'get',
+        success:function (data) {
+            buildNum(data);
+        }
+    })
+    function buildNum(num){
+        let numBlog = document.querySelector("#num");
+        numBlog.innerHTML=num;
+    }
+
 </script>
 </body>
 </html>

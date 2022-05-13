@@ -191,4 +191,23 @@ public class BlogServlet {
         response.sendRedirect("blog_list.html");
     }
 
+//    计算博客数量
+    @GetMapping("/num")
+    @ResponseBody
+    public Integer num(){
+        List<Blog> blogs = blogMapper.selectAllBlog();
+        int num = blogs.size();
+        return num;
+    }
+
+//    注册
+    @PostMapping("/reg")
+    public void regBlog(String username,String password,HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        userMapper.addUser(user);
+        response.sendRedirect("blog_login.html");
+    }
 }
