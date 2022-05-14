@@ -1,21 +1,58 @@
 package com.example.blog.common;
 
-import lombok.Data;
+import java.io.Serializable;
 
-import java.util.Map;
+/**
+ * @author 13
+ * @qq交流群 796794009
+ * @email 2449207463@qq.com
+ * @link http://13blog.site
+ */
+public class Result<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
+//    定义返回结果属性
+    private int resultCode;
+    private String message;
+    private T data;
 
-@Data
-public class Result {
-    private int status;
-    private String mes;
-    private Map<String,Object> data;
+    public Result() {
+    }
 
-//    public Result data(String key, Object value) {
-//        this.data.put(key, value);
-//        return this;
-//    }
+    public Result(int resultCode, String message) {
+        this.resultCode = resultCode;
+        this.message = message;
+    }
 
-    public void setData(String key, Object value) {
-        this.data.put(key, value);
+    public int getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "resultCode=" + resultCode +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

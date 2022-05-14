@@ -3,6 +3,8 @@ package com.example.blog.controller;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,9 @@ class Message {
 }
 @RestController
 public class FileUpload {
+//    读取配置文件中的key：path 到指定变量中
+    @Value("${path}")
+    private String path;
 
     @PostMapping("/upload")
 //    形参fileUpload 为表单中图片名称的key  也就是name属性定义的名称
@@ -39,6 +44,7 @@ public class FileUpload {
         try {
             file.transferTo(new File(filePath + newFileName));
             return new Message(0,"上传成功");
+
         } catch (IOException e) {
             e.printStackTrace();
             return new Message(-1,"上传失败");

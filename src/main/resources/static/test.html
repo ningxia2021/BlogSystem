@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+<input type="text" id="input" value="hhh">
+<input type="submit" id="submit" value="提交">
+<h1 id="q"></h1>
+
+<script src="js/jquery.min.js"></script>
+
+<script>
+    $('#submit').click(function () {
+
+        console.log($('#input').val());
+            console.log($('#input').html());
+            console.log($('#input').text());
+            let arr = $('#q').arr("val","你个der");
+        $('#q').innerHTML = arr;
+    })
+
+
+
+
+</script>
+</body>
+
+
+</html>
