@@ -3,10 +3,7 @@ package com.example.blog.common;
 import java.io.Serializable;
 
 /**
- * @author 13
- * @qq交流群 796794009
- * @email 2449207463@qq.com
- * @link http://13blog.site
+ * 定义属性类
  */
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -15,9 +12,12 @@ public class Result<T> implements Serializable {
     private String message;
     private T data;
 
+//    无参构造
     public Result() {
+
     }
 
+//    有参构造
     public Result(int resultCode, String message) {
         this.resultCode = resultCode;
         this.message = message;
