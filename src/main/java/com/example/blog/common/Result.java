@@ -6,7 +6,9 @@ import java.io.Serializable;
  * 定义属性类
  */
 public class Result<T> implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
 //    定义返回结果属性
     private int resultCode;
     private String message;

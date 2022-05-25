@@ -6,6 +6,7 @@ import com.example.blog.dao.UserMapper;
 import com.example.blog.entity.Blog;
 import com.example.blog.entity.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,7 @@ public class BlogServlet {
 
 //        用户名 密码 非空校验
         response.setContentType("text/html;charset=utf-8");
+
         if (username == null || username.equals("") || password == null || password.equals("")) {
             String html = "<h3>用户名或密码不能为空</h3>";
             response.getWriter().write(html);
