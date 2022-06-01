@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交一些参数，验证一些功能</title>
+</head>
+<body>
+<h1>添加图书</h1>
+<table>
+    <form action="test6" method="post">
+        <tr>
+            <td>图书名称</td>
+            <td>
+                <input type="text" name="name">
+            </td>
+        </tr>
+        <tr>
+            <td>图书作者</td>
+            <td>
+                <input type="text" name="author.name">
+            </td>
+        </tr>
+        <tr>
+            <td>作者年龄</td>
+            <td>
+                <input type="text" name="author.age">
+            </td>
+        </tr>
+        <tr>
+            <td>作者兴趣爱好</td>
+            <td>
+                <input type="checkbox" value="足球" name="favorites">足球
+                <input type="checkbox" value="篮球" name="favorites">篮球
+                <input type="checkbox" value="乒乓球" name="favorites">乒乓球
+            </td>
+        </tr>
+        <tr>
+            <td>出版时间</td>
+            <td>
+                <input type="date" name="publishDate" placeholder=" ">
+            </td>
+        </tr>
+        <tr>
+            <td>图书价格</td>
+            <td><input type="text" name="price"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="提交">
+            </td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>
